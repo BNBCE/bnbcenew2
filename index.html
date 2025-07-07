@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f1f1f1; }
+        h2 { color: #333; }
+        .section { background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+        input, select, button { margin: 5px 0; padding: 10px; width: 100%; max-width: 500px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+        th { background-color: #007bff; color: white; }
+    </style>
+</head>
+<body>
+
+    <h2>Admin Dashboard</h2>
+
+    <div class="section">
+        <h3>Add Course</h3>
+        <input type="text" id="courseName" placeholder="Course Name">
+        <input type="text" id="duration" placeholder="Duration (e.g., 6 Months)">
+        <input type="text" id="fee" placeholder="Fee (e.g., ₹5000)">
+        <button onclick="addCourse()">Add Course</button>
+        <table id="courseTable">
+            <thead>
+                <tr><th>Course</th><th>Duration</th><th>Fee</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script type="module" src="app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+</body>
+</html>
