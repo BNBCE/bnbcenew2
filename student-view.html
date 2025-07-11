@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>Public Course View</title>
+  <style>
+    body { font-family: Arial; background: #e0f7fa; padding: 20px; }
+    .course { background: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
+  </style>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+  <h2>📚 সকল কোর্স (পাবলিক ভিউ)</h2>
+  <div id="courseList"></div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDP7Q87PW-fmP2AoYQoUgLvu-8zO3_jFb8",
+      authDomain: "bnbce-admin-system.firebaseapp.com",
+      databaseURL: "https://bnbce-admin-system-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "bnbce-admin-system",
+      storageBucket: "bnbce-admin-system.appspot.com",
+      messagingSenderId: "140926536338",
+      appId: "1:140926536338:web:430f0d0025600ac1e8744b"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    const db = firebase.database();
+    db.ref("courses").on("value", snapshot => {
+      const data = snapshot.val();
+      const list = document.getElementById("courseList");
+      list.innerHTML = "";
+
+      for (let course in data) {
+        const courseData = data[course];
+        const div = document.createElement("div");
+        div.className = "course";
+        div.innerHTML = `<h3>${course}</h3>`;
+
+        for (let key in courseData.topics) {
+          const t = courseData.topics[key];
+          div.innerHTML += `<p>📌 ${t.name} - <a href="${t.video}" target="_blank">ভিডিও</a> | <a href="${t.pdf}" target="_blank">PDF</a></p>`;
+        }
+
+        list.appendChild(div);
+      }
+    });
+  </script>
+</body>
+</html>
